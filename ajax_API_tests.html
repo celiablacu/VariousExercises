@@ -1,0 +1,32 @@
+<html>
+    <head><title>Demo - Random name generator with Ajax and API</title></head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        
+        $.ajax({
+            url:'https://randomuser.me/api/',
+            method:'get',
+            success:function(data) {
+                console.log(data.results);
+                for (var i=0;i<data.results.length;i++) {
+                    var user = data.results[i];
+                    $('.firstname').text(user.name.first);
+                    $('.lastname').text(user.name.last);
+                    $('.picture').attr('src',user.picture.thumbnail);
+                    $('.picture').css('border-radius','50px');
+                    console.log(user);
+                }
+            },
+            error:function(err) {
+                console.log(err);
+            }
+        });
+    </script>
+    <body>
+        <h3>Demo - Random name generator with Ajax and API</h3>
+        <img class="picture"/>
+        <div class="firstname"></div>
+        <div class="lastname"></div>
+        <div class="placeholder"></div>
+    </body>
+</html>
